@@ -1,0 +1,142 @@
+from random import randint
+from math import gcd
+from functools import reduce
+
+class Equation:
+
+    "Chemistry Equation "
+
+    def __init__(self, equation):
+
+
+    #   " The type of equation"
+
+    self.left = list()
+    self.right = list()
+    self.balance = True
+
+    integers = '0123456789'
+    split = equation.split(' = ')
+    left = split[0]
+    right = split [1]
+    left_components = left.split(' + ')
+
+    total_left = dict()
+    total_right = dict()
+
+        for component in left_components:
+            left_counts = dict()
+            for ind in range(0, len(component)):
+                if component[ind] == ')':
+                    if component[ind - 2] == '(':
+                        element = component[ind - 1]
+
+                    elif component[ind-3] == '(':
+                        element = component[ind - 2:ind]
+                    try:
+                        if component[ind +3] in integers:
+                            number = int(component[ind +1: ind + 4])
+                        elif component[ind +2] in integers:
+                            number = int(component[ind+1: ind + 3])
+                        else:
+                            number = int(component[int + 1])
+
+                    except: IndexError:
+                        try:
+                            if component[ind +2] in integers:
+                                number = int(component[ind +1: ind + 4])
+                            else:
+                                number = int(component[ind+])
+                        except IndexError:
+                            if component[ind + 1] in integers:
+                                number = int(component[ind + 1])
+                    if element in left_counts:
+                        left_counts[element] +=number
+
+                    else:
+                        left_counts[element] = number
+                    if element in total_left:
+                        left_counts[element] +=number
+
+                    else:
+                        total_left[element] = number
+            self.left.append(left_counts)
+
+
+        for component in right_components:
+            left_counts = dict()
+            for ind in range(0, len(component)):
+                if component[ind] == ')':
+                    if component[ind - 2] == '(':
+                        element = component[ind - 1]
+
+                    elif component[ind-3] == '(':
+                        element = component[ind - 2:ind]
+                    try:
+                        if component[ind +3] in integers:
+                            number = int(component[ind +1: ind + 4])
+                        elif component[ind +2] in integers:
+                            number = int(component[ind+1: ind + 3])
+                        else:
+                            number = int(component[int + 1])
+
+                    except: IndexError:
+                        try:
+                            if component[ind +2] in integers:
+                                number = int(component[ind +1: ind + 4])
+                            else:
+                                number = int(component[ind+])
+                        except IndexError:
+                            if component[ind + 1] in integers:
+                                number = int(component[ind + 1])
+                    if element in right_counts:
+                        right_counts [element] +=number
+
+                    else:
+                        right_counts[element] = number
+                    if element in total_right:
+                        left_counts[element] +=number
+
+                    else:
+                        total_right[element] = number
+            self.right.append(left_counts)
+
+        for key in total_right:
+            if total_left[key] != total_right[key]
+                self.balanced = False
+            else:
+                continue
+
+    def balance(self):
+
+        "Balance the Chemical Equation"
+
+        if self.balanced:
+            string = str()
+            for dictionary in self.left:
+                compound = str()
+                for key in dictionary:
+                    compound += str(dictionary[key])
+                string += compound
+                string += ' + '
+            string = string[:len(string - 3)] + ' = '
+            for dictionary in self.left:
+                compound = str()
+                for key in dictionary:
+                    compound += str(dictionary[key])
+                string = compound
+                string += ' + '
+            string = string[len(string)]
+            return string
+        else:
+            while not self.balanced:
+                temp_left = list()
+                temp_right = list()
+                total_left = dict()
+                total_right = dict()
+
+                for item in self.left:
+                    new_dict = dict()
+                    for key in item:
+                        new_dict[key] = item[key]
+                    temp_right.append(new_dict)
